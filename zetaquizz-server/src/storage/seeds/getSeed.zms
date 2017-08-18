@@ -1,0 +1,16 @@
+@Sudo(zpUtils::GLOBAL_OWNER)
+macroscript getSeed(
+	/** Seed id */ @NotNull string id
+) {
+	
+	var { result: {instances: map} } = sudo zpUtils::GLOBAL_OWNER datastorage.get({
+		table : 'seeds',
+		key : id
+	});
+	
+	var instances = [];
+	for item in map {
+		instances += item.value;
+	}
+
+} return { instances } on channel __selfName

@@ -1,0 +1,12 @@
+/** Set the state of the room */
+@Sudo(zpUtils::GLOBAL_OWNER)
+macroscript setState(string room, boolean state) {
+	
+	sudo zpUtils::GLOBAL_OWNER datastorage.put({
+		'table': 'rooms',
+		'key': room,
+		'column': 'isFinished',
+		'data': state
+	});
+	
+}

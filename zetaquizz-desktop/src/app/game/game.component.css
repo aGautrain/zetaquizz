@@ -1,0 +1,301 @@
+
+/* STEPS */
+
+:host .quizz-steps
+{
+    padding-left: 0px;
+    padding-top: 30px;
+}
+
+:host .quizz-step
+{
+    display: inline-block;
+    padding: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+    color: #ABABAB;
+    border-bottom: solid transparent 2px;
+    transition: 0.3s;
+}
+
+:host .quizz-step:not(.quizz-step--active) i.fa-caret-up
+{
+    opacity: 0;
+}
+
+:host .quizz-step i.fa-home
+{
+    color: #40C4FF;
+}
+
+:host .quizz-step i.fa-trophy
+{
+    color: #FBC81F;
+}
+
+:host .quizz-step--correct
+{
+    color: #009C47;
+}
+
+:host .quizz-step--incorrect
+{
+    color: #E52F39;
+}
+
+:host .quizz-step--active i.fa-caret-up
+{
+    opacity: 1;
+    transition: 0.2s;
+    color: black;
+}
+
+/* END STEPS */
+
+
+/* TIMER */
+
+:host .quizz-timer
+{
+    position: fixed;
+    bottom: 30px;
+    right: 50px;
+}
+
+:host .quizz-timer span
+{
+    font-size: 500%;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 200;
+    letter-spacing: 2px;
+}
+
+/* END TIMER */
+
+
+/* INSTANCES */
+
+@keyframes spin {
+    0%   {transform: rotateZ(0deg);}
+    50% { transform: rotateZ(-180deg);}
+    100% {transform: rotateZ(-360deg);}
+}
+
+@keyframes blink {
+    /**
+     * At the start of the animation the dot
+     * has an opacity of .2
+     */
+    0% {
+      opacity: .2;
+    }
+    /**
+     * At 20% the dot is fully visible and
+     * then fades out slowly
+     */
+    20% {
+      opacity: 1;
+    }
+    /**
+     * Until it reaches an opacity of .2 and
+     * the animation can start again
+     */
+    100% {
+      opacity: 0;
+    }
+}
+
+:host .dots span {
+    animation-name: blink;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+}
+
+:host .dots span:nth-child(2) {
+    /**
+     * Starts the animation of the third dot
+     * with a delay of .2s, otherwise all dots
+     * would animate at the same time
+     */
+    animation-delay: .3s;
+}
+
+:host .dots span:nth-child(3) {
+    /**
+     * Starts the animation of the third dot
+     * with a delay of .4s, otherwise all dots
+     * would animate at the same time
+     */
+    animation-delay: .6s;
+}
+
+:host .fa-hourglass-half
+{
+    animation-name: spin;
+    animation-duration: 3s;
+    animation-direction: alternate;
+    animation-delay: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+:host .dots span
+{
+    font-size: 100%;
+    display: inline-block;
+    margin: 30px 10px 20px 10px;
+}
+
+
+/* QUIZZ STYLES V2 */
+:host .game-container article
+{
+    margin: auto;
+}
+
+:host .instance--question
+{
+    display: block;
+    padding-top: 35px;
+    font-weight: bold;
+    padding-bottom: 35px;
+}
+
+:host .instance--answer
+{
+    display: inline-block;
+    padding: 50px 30px 50px 30px;
+    background-color: black;
+    color: white;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 120%;
+    font-family: 'Rubik', sans-serif;
+    transform: scale(1);
+    background-color: gray;
+    opacity: 0.5;
+}
+
+:host .instance--answers
+{
+    display: inline-block;
+    padding-left: 40px;
+    border-left: solid gray 5px;
+}
+
+:host .instance--answer:nth-child(1):hover { background-color: #80CD3D; border-color: #80CD3D; }
+
+:host .instance--answer:nth-child(2):hover { background-color: #1AB5F1; border-color: #1AB5F1; }
+
+:host .instance--answer:nth-child(3):hover { background-color: #F1452A; border-color: #F1452A; }
+
+:host .instance--answer:nth-child(4):hover { background-color: #FBC81E; border-color: #FBC81E; }
+
+:host .instance--answer:nth-child(even)
+{
+    margin-left: 20px;
+}
+
+:host .instance--answer:nth-child(odd)
+{
+    margin-right: 20px;
+}
+
+:host .instance--answer:hover
+{
+    cursor: pointer;
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+/* PROGRESSBAR */
+
+.quizz-progress {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	height: 20px;
+	background-color: darkslateblue;
+}
+
+.quizz-progress div {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    height: 20px;
+    background-color: white;
+    transition: 1s;
+}
+
+.quizz-progress--0 {
+    width: 100%;
+}
+
+.quizz-progress--10 {
+    width: 90%;
+}
+
+.quizz-progress--20 {
+    width: 80%;
+}
+
+.quizz-progress--30 {
+    width: 70%;
+}
+
+.quizz-progress--40 {
+    width: 60%;
+}
+
+.quizz-progress--50 {
+    width: 50%;
+}
+
+.quizz-progress--60 {
+    width: 40%;
+}
+
+.quizz-progress--70 {
+    width: 30%;
+}
+
+.quizz-progress--80 {
+    width: 20%;
+}
+
+.quizz-progress--90 {
+    width: 10%;
+}
+
+.quizz-progress--100 {
+    width: 0%;
+}
+
+/* END PROGRESSBAR */
+
+/* RESPONSE */
+
+:host article.response
+{
+    padding: 80px 40px 40px 40px;
+    font-size: 150%;
+}
+
+:host .response i.fa-times
+{
+    color: #CB2028;
+}
+
+:host .response i.fa-check
+{
+    color: #009B47;
+}
+
+:host .response--text
+{
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
+}
+/* END QUIZZ STYLES */

@@ -1,0 +1,103 @@
+<div class="area-main">
+    <header *ngIf="!gameStarted" [@swipeTop]>
+        <div class="header-bckg">
+            <h1 class="main-title">à toi de jouer</h1>
+            <a (click)="backLobby()" class="btn btn-danger">
+                <i class="fa fa-sign-out" aria-hidden="true"></i> Partir
+            </a>
+        </div>
+    </header>
+
+    <a *ngIf="gameStarted" (click)="backLobby()" class="btn btn-danger btn-disconnect">
+        partir
+    </a>
+
+    <!-- STEPS OF THE QUIZZ -->
+    <section class="container">
+        <ul class="quizz-steps">
+            <li [ngClass]="{'quizz-step': true, 'quizz-step--active': isInLobby()}">
+                <i class="fa fa-home" aria-hidden="true"></i><br/>
+                <i class="fa fa-caret-up" aria-hidden="true"></i>
+            </li>
+            <li *ngFor="let step of gameSteps"
+                [ngClass]="{'quizz-step': true, 'quizz-step--active': isActive(step), 'quizz-step--correct': isCorrect(step), 'quizz-step--incorrect': isIncorrect(step)}">
+                <i class="fa fa-circle" aria-hidden="true"></i><br/>
+                <i class="fa fa-caret-up" aria-hidden="true"></i>
+            </li>
+            <li [ngClass]="{'quizz-step': true, 'quizz-step--active': isInScores()}">
+                <i class="fa fa-trophy" aria-hidden="true"></i><br/>
+                <i class="fa fa-caret-up" aria-hidden="true"></i>
+            </li>
+        </ul>
+
+    </section>
+    <!-- END STEPS OF THE QUIZZ -->
+
+
+    <game-lobby *ngIf="!gameStarted" [players]="participants"></game-lobby>
+
+    <!-- TIMER -->
+    <section *ngIf="timeLeft > 0" class="quizz-timer">
+        <span>{{ timeLeft }}</span>
+    </section>
+    <!-- END TIMER -->
+
+    <!-- TIMER PROGRESSBAR *ngIf="timeLeft > 0" -->
+    <section *ngIf="gameStarted" class="quizz-progress">
+        <div [class]="timeRemaining()"></div>
+    </section>
+    <!-- END PROGRESSBAR -->
+
+    <!-- INSTANCE -->
+    <section *ngIf="gameStarted" class="container game-container">
+        <!-- QUESTION AND ANSWERS *ngIf="canAnswer || !responseReceived; else questionResult" -->
+        <div class="row">
+            <article *ngIf="canAnswer || !responseReceived; else questionResult" class="col-xs-12 col-md-11 col-md-offset-1">
+                <h1 class="instance--question">Q{{instanceNumero}} - {{instance?.question}}</h1>
+                <ul class="col-xs-10 col-xs-offset-2 instance--answers">
+                    <li *ngFor="let answer of instance?.answers" (click)="answerQuestion(answer)" class="col-md-5 instance--answer">
+                        <span>
+                            {{answer}}
+                        </span>
+                    </li>
+                </ul>
+            </article>
+        </div>
+        <!-- END Q&A -->
+
+
+
+        <!-- PLAYER RESPONDED -->
+        <ng-template #questionResult >
+
+            <article class="col-xs-12 response">
+                <i class="fa fa-3x fa-{{ getAnswerIcon() }}" aria-hidden="true"></i>
+                <br/>
+                <h2 class="response--text">
+                    {{ getAnswerResult() }}
+                </h2>
+                <a *ngIf="isNotLastQuestion(); else quizzEndedMsg">En attente de la prochaine question</a><br/>
+                <span *ngIf="isNotLastQuestion()" class="dots">
+                    <span>
+                        <i class="fa fa-square" aria-hidden="true"></i>
+                    </span>
+                    <span>
+                        <i class="fa fa-square" aria-hidden="true"></i>
+                    </span>
+                    <span>
+                        <i class="fa fa-square" aria-hidden="true"></i>
+                    </span>
+                </span>
+                <ng-template #quizzEndedMsg>
+                    <a>Quizz terminé, merci de votre participation !</a>
+                </ng-template>
+            </article>
+        </ng-template>
+        <!-- END PLAYER RESPONDED -->
+    </section>
+    <!-- END INSTANCE -->
+
+    <!-- LEADERBOARD -->
+    <game-leaderboard *ngIf="gameStarted" [players]="participants"></game-leaderboard>
+    <!-- END LEADERBOARD -->
+</div>

@@ -1,0 +1,28 @@
+@Sudo(zpUtils::GLOBAL_OWNER)
+macroscript setSeed(
+	/** Seed composition */ @NotNull object seed
+) {
+	
+	var id = str:upper(str:rnd36(6));
+	
+	var map = {};
+	var index = 0;
+	var str = "";
+	
+	for instance in seed {
+		instance['solution'] = instance['answers'][instance['solution']];
+		instance['answers'] = coll:filter(instance['answers'], x -> (x != ""));
+		str = "" + index + "";
+		map[str] = instance;
+		index += 1;
+	}
+	
+	
+	var put = sudo zpUtils::GLOBAL_OWNER datastorage.put({
+		table : 'seeds',
+		key : id,
+		column : 'instances',
+		data : map
+	});
+	
+} return { id } on channel __selfName

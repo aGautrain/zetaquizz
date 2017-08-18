@@ -1,0 +1,27 @@
+<article [ngClass]="{'quizz-item': true, 'quizz-item--blocked': isBlocked()}">
+    <h3 class="quizz-item--name">{{room.name}}</h3>
+    <ul class="quizz-item--properties">
+        <li>
+            <i class="quizz-item--property-icon fa fa-th-list" aria-hidden="true"></i>
+            <span class="quizz-item--property-value">{{room.metadata?.progressCurrentQ}}/{{room.metadata?.progressMaxQ}} questions</span>
+        </li>
+        <li>
+            <i class="quizz-item--property-icon fa fa-users" aria-hidden="true"></i>
+            <span class="quizz-item--property-value">{{room.members?.length}} participant(s)</span>
+        </li>
+        <li>
+            <i class="quizz-item--property-icon fa fa-clock-o" aria-hidden="true"></i>
+            <span class="quizz-item--property-value">{{getSinceTime()}}</span>
+        </li>
+        <li *ngIf="room.metadata?.needPassword; else publicRoom">
+            <i class="quizz-item--property-icon fa fa-lock" aria-hidden="true"></i>
+            <span class="quizz-item--property-value">Private</span>
+        </li>
+        <ng-template #publicRoom>
+             <li>
+                 <i class="quizz-item--property-icon fa fa-home" aria-hidden="true"></i>
+                 <span class="quizz-item--property-value">Public</span>
+             </li>
+        </ng-template>
+    </ul>
+</article>

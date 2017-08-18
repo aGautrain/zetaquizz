@@ -1,0 +1,17 @@
+/** modify the response state of a member */
+@Sudo(zpUtils::GLOBAL_OWNER)
+macroscript setCanAnswer(
+	/** room where is member */ @NotNull string room,
+	/** member key */ @NotNull string member,
+	/** response state to apply */ @NotNull number state
+) {
+	
+	sudo zpUtils::GLOBAL_OWNER datastorage.put({
+		'table': 'rooms',
+		'column': 'answers',
+		'key': room,
+		'key2': member,
+		data: state
+	});
+	
+}

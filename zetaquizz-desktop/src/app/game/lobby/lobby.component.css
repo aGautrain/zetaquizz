@@ -1,0 +1,23 @@
+/* LOBBY */
+:host .quizz-lobby
+{
+    text-align: center;
+}
+
+:host .quizz-lobby .user
+{
+    display: inline-block;
+    margin: 50px;
+}
+
+:host .quizz-lobby .user--img
+{
+    font-size: 600%;
+}
+
+:host .quizz-lobby .user--login
+{
+    font-size: 150%;
+    font-weight: bold;
+    font-family: 'Rubik', sans-serif;
+}

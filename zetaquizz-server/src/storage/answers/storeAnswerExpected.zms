@@ -1,0 +1,9 @@
+@Sudo(zpUtils::GLOBAL_OWNER)
+macroscript storeAnswerExpected (string room, string answer) {
+	sudo zpUtils::GLOBAL_OWNER datastorage.put({
+		table : 'rooms',
+		data : answer,
+		key : room,
+		column : 'answerExpected'
+	});
+}

@@ -1,0 +1,10 @@
+<section class="quizz-leaderboard">
+    <h3 class="sub-title">Scores</h3>
+    <div class="sub-title--diviser"></div>
+
+    <ul class="leaderboard-players">
+        <li *ngFor="let player of players">
+            <i class="fa fa-user-o"></i> <b>{{player.login}}</b> {{player.score}} points
+        </li>
+    </ul>
+</section>

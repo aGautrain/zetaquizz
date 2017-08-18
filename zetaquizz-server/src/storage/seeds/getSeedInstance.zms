@@ -1,0 +1,9 @@
+@Sudo(zpUtils::GLOBAL_OWNER)
+macroscript getSeedInstance(
+	/** Seed id */ @NotNull string id,
+	/** Instance numero */ @NotNull number numero
+) {
+	
+	var {result: {instances: instances}} = call getSeed({id: id});
+
+} return { id } on channel __selfName

@@ -1,0 +1,82 @@
+:host .quizz-item
+{
+    background-color: #d9d9d9;
+    color: #1a1a1a;
+    margin: 10px;
+    max-width: 250px;
+    width: 250px;
+}
+
+:host .quizz-item--name
+{
+    font-family: 'Rubik', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #1a1a1a;
+    color: white;
+    padding: 20px 30px 20px 30px;
+    margin: 0px;
+}
+
+:host .quizz-item--properties
+{
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
+    padding-left: 0px;
+    font-size: 100%;
+    text-align: left;
+}
+
+:host .quizz-item--properties li
+{
+    display: block;
+}
+
+:host .quizz-item--property-value
+{
+    display: inline-block;
+    padding-left: 15px;
+    padding-right: 30px;
+    text-align: left;
+}
+
+:host .quizz-item--blocked:hover
+{
+    cursor: not-allowed;
+}
+
+:host article:not(.quizz-item--blocked) .quizz-item--properties li:hover
+{
+    background-color: #bfbfbf;
+}
+
+:host .quizz-item--property-icon
+{
+    display: inline-block;
+    background-color: #1a1a1a;
+    color: white;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+}
+
+:host article:not(.quizz-item--blocked) .quizz-item--properties li:nth-child(1) .quizz-item--property-icon
+{
+    background-color: #80CD3D;
+}
+
+:host article:not(.quizz-item--blocked) .quizz-item--properties li:nth-child(2) .quizz-item--property-icon
+{
+    background-color: #1AB5F1;
+}
+
+:host article:not(.quizz-item--blocked) .quizz-item--properties li:nth-child(3) .quizz-item--property-icon
+{
+    background-color: #F1452A;
+}
+
+:host article:not(.quizz-item--blocked) .quizz-item--properties li:nth-child(4) .quizz-item--property-icon
+{
+    background-color: #FBC81E;
+}

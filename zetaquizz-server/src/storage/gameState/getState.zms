@@ -1,0 +1,12 @@
+/** Get the state of the room */
+@Sudo(zpUtils::GLOBAL_OWNER)
+macroscript getState(string room) {
+	
+	var {result: data } = sudo zpUtils::GLOBAL_OWNER datastorage.get({
+		'table': 'rooms',
+		'key': room
+	});
+	
+	var isFinished = data.isFinished;
+	
+} return { isFinished }

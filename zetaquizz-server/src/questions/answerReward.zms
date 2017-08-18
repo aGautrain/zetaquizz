@@ -1,0 +1,30 @@
+/** macro which determines points rewarding a good answer */
+macroscript answerReward(string room) {
+	
+	// Changing metadata - working !
+	var { result: { value }} = sudo zpUtils::GLOBAL_OWNER call zpUtils::getMetadata({ id: room });
+	var isChronomode = value.chronoMode;
+	
+	var reward = ANSWERING_REWARD;
+	
+	if(isChronomode){
+		
+		var {result: data } = sudo zpUtils::GLOBAL_OWNER datastorage.get({
+			'table': 'rooms',
+			'key': room
+		});
+		
+		var answers = data.answers;
+		var goodAnswers = 0;
+		
+		for answer in answers{
+			if(answer.value == 2){
+				goodAnswers += 1;
+			}
+		}
+		
+		reward = math:max(3 - goodAnswers, 1);
+		
+	}	
+	
+} return { reward }

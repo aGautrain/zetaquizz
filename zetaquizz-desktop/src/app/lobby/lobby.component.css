@@ -1,0 +1,16 @@
+:host .room-card
+{
+    max-width: 400px;
+    display: inline-block;
+    margin: 10px;
+}
+
+:host .room-card--closed
+{
+    opacity: 0.8;
+}
+
+:host .room-card--closed i
+{
+    background-color: gray !important;
+}

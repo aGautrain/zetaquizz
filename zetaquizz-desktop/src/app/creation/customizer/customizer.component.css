@@ -1,0 +1,48 @@
+
+:host .input-group
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+:host .custom-question
+{
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+:host .custom-question .btn
+{
+    font-size: 120%;
+}
+
+:host .popup-close
+{
+    position: absolute;
+    top: -15px;
+    right: -10px;
+}
+
+:host .popup-close .btn
+{
+    border-radius: 0px;
+    padding: 8px 12px 10px 12px;
+}
+
+:host .btn-group a.btn {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+:host .titles
+{
+    font-size: 130%;
+}
+
+:host .seed-input
+{
+    text-align: center;
+    height: auto;
+    font-size: 150%;
+    padding: 15px;
+}

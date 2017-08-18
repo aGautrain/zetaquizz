@@ -1,0 +1,102 @@
+// LOBBY ROOM CREATION
+sudo zpUtils::GLOBAL_OWNER call zpGroupRecipe::createGroup({
+		name: ROOM_LOBBY_NAME,
+		id: ROOM_LOBBY_ID,
+		metadata: {
+			open: true
+		},
+		members: []
+});
+// END LOBBY ROOM CREATION
+
+
+
+// ACCOUNTS INITIALIZATION
+auth.memauth_createUser({
+	login: 'Server',
+	password: 'S',
+	idempotence: Idempotence_IGNORE_IDENTICAL
+});
+
+auth.memauth_createUser({
+	login: 'Antoine',
+	password: 'A',
+	idempotence: Idempotence_IGNORE_IDENTICAL
+});
+// END ACCOUNTS INITIALIZATION
+
+// DATASTORAGE
+datastorage.gda_createTable({
+	'name' : 'rooms', 
+	'columns' : [
+		{
+			// scores['member'] => how many points scored the member
+			'name' : 'scores', 
+			'map' : true, 
+			'type' : GdaDataType_DOUBLE
+		},
+		{
+			// answers['member'] => the member can answer or not
+			'name': 'answers',
+			'map': true,
+			'type': GdaDataType_DOUBLE // Double to represent a state (waiting, wrong, right)
+		},
+		{
+			// the answer considered as right for the active question
+			'name': 'answerExpected',
+			'map': false,
+			'type': GdaDataType_STRING
+		},
+		{
+			// whether the quizz is finished or not
+			'name': 'isFinished',
+			'map': false,
+			'type': GdaDataType_BOOLEAN
+		},
+		{
+			// the key of an already existing set of questions stored in 'seeds' table
+			'name': 'seed',
+			'map': false,
+			'type': GdaDataType_STRING
+		}
+	]
+});
+
+datastorage.gda_createTable({
+	'name': 'seeds',
+	'columns': [
+		{
+			'name': 'instances',
+			'map': false,
+			'type': GdaDataType_OBJECT
+		}
+	]
+});
+// END DATASTORAGE
+
+// INDEX STORING QUESTIONS
+es.search_createIndex({
+	index: 'quizz',
+	mappings: {
+		question: {
+			properties: {
+				question: {
+					type: "string"
+				},
+				answers: {
+					type: "string"
+				},
+				solution: {
+					type: "string"
+				},
+				origine: {
+					type: "string"
+				}
+			}
+			
+		}
+	}
+});
+// END INDEX STORING QUESTIONS
+
+

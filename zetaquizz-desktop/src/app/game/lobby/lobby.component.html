@@ -1,0 +1,8 @@
+<section class="container-fluid quizz-lobby">
+    <h3 class="sub-title">Joueurs</h3>
+    <div class="sub-title--diviser"></div>
+    <article *ngFor="let player of players" [@element] class="user">
+        <i class="fa fa-user user--img" aria-hidden="true"></i><br/>
+        <span class="user--login">{{player.login}}</span>
+    </article>
+</section>

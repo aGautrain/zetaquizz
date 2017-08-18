@@ -1,0 +1,190 @@
+<div class="area-main">
+    <header>
+        <div class="header-bckg">
+            <h1 class="main-title">Creation</h1>
+            <h4>Let's create the quizz, following three easy steps</h4>
+            <a (click)="backLobby()" class="btn btn-info btn-disconnect">
+                BACK <i class="fa fa-home" aria-hidden="true"></i>
+            </a>
+        </div>
+    </header>
+    <section class="container">
+
+
+
+
+
+
+
+
+        <h3 class="sub-title">Paramètres</h3>
+        <div class="sub-title--diviser"></div>
+
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <ul class="tabs">
+                    <li [ngClass]="{'tabs--active': tabQuizzRandom()}">
+                        <a (click)="goTabRandom()"
+                        [ngClass]="{'btn': true, 'btn-link': true, 'disabled': tabQuizzRandom()}">
+                            Quizz aléatoire
+                        </a>
+                    </li>
+                    <li [ngClass]="{'tabs--active': tabQuizzCustom()}">
+                        <a (click)="goTabCustom()"
+                        [ngClass]="{'btn': true, 'btn-link': true, 'disabled': tabQuizzCustom()}">
+                            Quizz perso
+                        </a>
+                    </li>
+                </ul>
+                <article class="well bs-component">
+                    <form class="form-horizontal">
+                        <fieldset>
+<!-- RANDOM VERSION -->
+                            <div *ngIf="tabQuizzRandom(); else tabCustom">
+                                <!-- ROOM NAME -->
+                                <div class="form-group">
+                                    <label for="roomName" class="control-label">
+                                        <i class="fa fa-flag" aria-hidden="true"></i> Name of the quizz
+                                    </label>
+                                    <div class="col-lg-12">
+                                        <input [(ngModel)]="roomName" class="form-control" name="roomName" placeholder="Will appear on lobby" type="text">
+                                    </div>
+                                </div>
+                                <!-- END ROOM NAME -->
+                                <!-- ROOM PASSWORD -->
+                                <div class="form-group">
+                                    <label for="roomPassword" class="control-label">
+                                        <i class="fa fa-unlock-alt" aria-hidden="true"></i> Password
+                                    </label>
+                                    <div class="col-lg-12">
+                                        <input [(ngModel)]="roomPassword" class="form-control" name="roomPassword" placeholder="Prevents random people from entering" type="text">
+                                    </div>
+                                </div>
+                                <!-- END ROOM PASSWORD -->
+                                <!-- ROOM QUESTIONS -->
+                                <div class="form-group">
+                                    <label for="roomQuestions" class="control-label">
+                                        <i class="fa fa-th-list" aria-hidden="true"></i> Number of questions
+                                    </label>
+                                    <div class="col-lg-12">
+                                        <input [(ngModel)]="roomQuestions" class="form-control" name="roomQuestions" min="3" max="15" placeholder="For arbitrary reasons, must be between 3 and 15" type="number">
+                                    </div>
+                                </div>
+                                <!-- END ROOM QUESTIONS -->
+
+                                <!-- ROOM LOBBY TIME -->
+                                <div class="form-group">
+                                    <label for="roomTime" class="control-label">
+                                        <i class="fa fa-hourglass-half" aria-hidden="true"></i> Time spent before launch
+                                    </label>
+                                    <div class="col-lg-12">
+                                        <input [(ngModel)]="roomTime" class="form-control" name="roomTime" min="10" max="75" step="5" placeholder="Leave time for people to join room" type="number">
+                                    </div>
+                                </div>
+                                <!-- END ROOM LOBBY TIME -->
+
+                                <!-- ROOM MODE -->
+                                <div class="form-group">
+                                    <label for="roomChronomode" class="control-label">
+                                        <i class="fa fa-gamepad" aria-hidden="true"></i> Game mode
+                                    </label>
+                                    <div class="col-lg-12 text-left">
+                                        <div class="radio">
+                                            <label>
+                                                <input [(ngModel)]="roomChronomode" name="roomChronomode" value="default" type="radio">
+                                                DEFAULT - Right answer + 5 points, wrong answers -1 point
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input [(ngModel)]="roomChronomode" name="roomChronomode" value="chronomode" type="radio">
+                                                CHRONOMODE - Earn points based on how fast you answer
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END ROOM MODE -->
+
+                            </div>
+<!-- END RANDOM VERSION -->
+
+<!-- CUSTOM VERSION -->
+                            <ng-template #tabCustom>
+                                    <!-- ROOM NAME -->
+                                    <div class="form-group">
+                                        <label for="roomName" class="control-label">
+                                            <i class="fa fa-flag" aria-hidden="true"></i> Name of the quizz
+                                        </label>
+                                        <div class="col-lg-12">
+                                            <input [(ngModel)]="roomName" class="form-control" name="roomName" placeholder="Will appear on lobby" type="text">
+                                        </div>
+                                    </div>
+                                    <!-- END ROOM NAME -->
+
+                                    <!-- ROOM PASSWORD -->
+                                    <div class="form-group">
+                                        <label for="roomPassword" class="control-label">
+                                            <i class="fa fa-unlock-alt" aria-hidden="true"></i> Password
+                                        </label>
+                                        <div class="col-lg-12">
+                                            <input [(ngModel)]="roomPassword" class="form-control" name="roomPassword" placeholder="Prevents random people from entering" type="text">
+                                        </div>
+                                    </div>
+                                    <!-- END ROOM PASSWORD -->
+
+                                    <!-- ROOM LOBBY TIME -->
+                                    <div class="form-group">
+                                        <label for="roomTime" class="control-label">
+                                            <i class="fa fa-hourglass-half" aria-hidden="true"></i> Time spent before launch
+                                        </label>
+                                        <div class="col-lg-12">
+                                            <input [(ngModel)]="roomTime" class="form-control" name="roomTime" min="10" max="75" step="5" placeholder="Leave time for people to join room" type="number">
+                                        </div>
+                                    </div>
+                                    <!-- END ROOM LOBBY TIME -->
+
+                                    <!-- ROOM MODE -->
+                                    <div class="form-group">
+                                        <label for="roomChronomode" class="control-label">
+                                            <i class="fa fa-gamepad" aria-hidden="true"></i> Game mode
+                                        </label>
+                                        <div class="col-lg-12 text-left">
+                                            <div class="radio">
+                                                <label>
+                                                    <input [(ngModel)]="roomChronomode" name="roomChronomode" value="default" type="radio">
+                                                    DEFAULT - Right answer + 5 points, wrong answers -1 point
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input [(ngModel)]="roomChronomode" name="roomChronomode" value="chronomode" type="radio">
+                                                    CHRONOMODE - Earn points based on how fast you answer
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- END ROOM MODE -->
+
+                            </ng-template>
+<!-- END RANDOM VERSION -->
+
+
+                </fieldset>
+            </form>
+
+            <questions-customizer *ngIf="tabQuizzCustom()" #seed></questions-customizer>
+
+        </article>
+
+
+
+
+
+        </div>
+    </div>
+
+    <a (click)="create()" [ngClass]="{'btn': true, 'btn-default': true, 'disabled': !formComplete()}">
+        <i class="fa fa-play" aria-hidden="true"></i> Let's play
+    </a>
+
+    </section>

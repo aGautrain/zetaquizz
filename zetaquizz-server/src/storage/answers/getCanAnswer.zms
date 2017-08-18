@@ -1,0 +1,14 @@
+/** obtain the response state of a member */
+@Sudo(zpUtils::GLOBAL_OWNER)
+macroscript getCanAnswer(
+	/** room in which is the member */ @NotNull string room,
+	/** member */ @NotNull string member
+) {
+	var {result: data } = sudo zpUtils::GLOBAL_OWNER datastorage.get({
+		'table': 'rooms',
+		'key': room
+	});
+	
+	var canAnswer = data.answers[member];
+
+} return { /** 0, 1, 2 <=> not responded, wrong, right */ canAnswer }

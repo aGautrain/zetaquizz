@@ -1,0 +1,106 @@
+body
+{
+    margin: 0;
+}
+
+.area-main
+{
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    padding-bottom: 100px;
+}
+
+.area-main header
+{
+    background-image: url('./assets/bckg.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    color: white;
+}
+
+
+header .header-bckg
+{
+    background-color: rgba(0,0,0,0.5);
+    padding: 50px;
+}
+
+.main-title
+{
+    margin: 0px;
+    padding: 20px;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0px 0px 2px 5px black;
+}
+
+.sub-title
+{
+    margin: 20px 0px 0px 0px;
+    padding: 10px;
+    font-family: 'Rubik', sans-serif;
+    color: gray;
+}
+
+.sub-title--diviser
+{
+    width: 100px;
+    height: 1px;
+    background-color: lightgray;
+    margin: auto;
+    margin-bottom: 40px;
+}
+
+.main-message
+{
+	font-family: 'Rubik',sans-serif;
+	font-weight: 700;
+	padding: 50px;
+}
+
+a.btn {
+    color: white;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+a.btn:hover {
+    color: white;
+}
+
+.separator {
+    position: relative;
+    height: 1px;
+    background-color: lightgray;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+
+a.btn.btn-disconnect
+{
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	margin-right: 0px;
+	margin-top: 0px;
+	font-size: 150%;
+}
+
+a.btn.btn-action
+{
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-left: 0px;
+    margin-bottom: 0px;
+    margin-right: 0px;
+    padding: 30px 20px 30px 20px;
+    font-size: 150%;
+    border-radius: 0px;
+    z-index: 10;
+}

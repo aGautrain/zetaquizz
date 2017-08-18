@@ -1,0 +1,12 @@
+/** Obtain the answer expected for the room */
+@Sudo(zpUtils::GLOBAL_OWNER)
+macroscript getAnswerExpected (string room) {
+	
+	var {result: data } = sudo zpUtils::GLOBAL_OWNER datastorage.get({
+		'table': 'rooms',
+		'key': room
+	});
+	
+	var answer = data.answerExpected;
+	
+} return { answer }

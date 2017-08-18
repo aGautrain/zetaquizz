@@ -1,0 +1,10 @@
+macroscript signup(
+	@NotNull string login,
+	@NotNull string password
+) {
+	var usr = auth.createUser({
+		"login": login,
+		"password": password
+	});
+	
+} return { usr } on channel __selfName

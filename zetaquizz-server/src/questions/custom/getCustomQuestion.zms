@@ -1,0 +1,15 @@
+/** Pick one question from seed */
+macroscript getCustomQuestion(
+	string seed,
+	number remaining
+) {
+	
+	var {result: {instances: instances}} = call getSeed({id: seed});
+	
+	var length = coll:size(instances);
+	
+	var questionNumero = length - (remaining +1);
+	
+	var instance = instances[questionNumero];
+
+} return { instance }

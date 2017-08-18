@@ -1,0 +1,28 @@
+/** Prevent players from entering the room and initialize storage */
+macroscript closeRoom (string id) {
+	
+	var { result: { value: metadata }} = sudo zpUtils::GLOBAL_OWNER call zpUtils::getMetadata({id: id}) hardFail;
+	
+	metadata.open = false;
+	metadata.closedAt = time:now();
+	
+	sudo zpUtils::GLOBAL_OWNER call zpUtils::setMetadata({id: id, metadata: metadata}) hardFail;
+	
+	
+	// Initialization here as we know nobody new will enter now
+	call initializeRoomStorage({room : id}) hardFail;
+	
+	// Send initial scores
+	var {result: {scores: scores} } = call getScores({room: id}) hardFail;
+	var prettyScores = [];
+	
+	for score in scores {
+		prettyScores = list:add(prettyScores, {
+			userKey: score.key,
+			score: 0
+		});
+	}
+
+	call sendScores({room: id, scores: prettyScores}) hardFail;
+	
+} return { metadata } on channel __selfName

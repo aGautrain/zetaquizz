@@ -1,0 +1,67 @@
+<div class="area-main">
+
+    <section class="container">
+
+        <div class="rocket-enter"><i class="fa fa-rocket"></i><i class="fa fa-fire"></i></div>
+        <div class="rocket-leave"><i class="fa fa-rocket"></i><i class="fa fa-fire"></i></div>
+
+        <form *ngIf="isInLogin; else isInSignup" action="#" class="login-form">
+
+            <h1>ZetaQuizz</h1>
+
+            <div class="login-form--input">
+                <label for="login">Name</label>
+                <input [(ngModel)]="login" [disabled]="submited" type="text" name="login">
+            </div>
+
+            <div class="login-form--input">
+                <label for="password">Password</label>
+                <input [(ngModel)]="password" [disabled]="submited" class="mdl-textfield__input" type="password" name="password">
+            </div>
+
+            <a (click)="signin()" [ngClass]="{'btn': true, 'btn-default': true, 'disabled': !canSubmit()}">
+                <i class="fa fa-sign-in" aria-hidden="true"></i> Sign in
+            </a>
+
+            <br/>
+
+            <p *ngIf="error" class="login-form--error"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{error}}</p>
+
+            <p class="login-form--register">No account yet ? Don't wait and join us, <a (click)="switchScreen()">by going there</a></p>
+
+        </form>
+
+        <ng-template #isInSignup>
+            <form action="#" class="login-form">
+
+                <h1>ZetaQuizz</h1>
+
+                <p>
+                    Create quizz with your own questions and join others to play in real-time !
+                </p>
+
+                <div class="login-form--input">
+                    <label for="login">Name</label>
+                    <input [(ngModel)]="login" [disabled]="submited" type="text" name="login">
+                </div>
+
+                <div class="login-form--input">
+                    <label for="password">Password</label>
+                    <input [(ngModel)]="password" [disabled]="submited" class="mdl-textfield__input" type="password" name="password">
+                </div>
+
+                <a (click)="signup()" [ngClass]="{'btn': true, 'btn-default': true, 'disabled': !canSubmit()}">
+                    <i class="fa fa-user-plus" aria-hidden="true"></i> Sign up
+                </a>
+
+                <br/>
+
+                <p *ngIf="error" class="login-form--error"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{error}}</p>
+
+                <p class="login-form--register">Already have an account ? <a (click)="switchScreen()">Sign in now</a></p>
+
+            </form>
+        </ng-template>
+
+    </section>
+</div>

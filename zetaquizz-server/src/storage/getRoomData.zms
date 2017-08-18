@@ -1,0 +1,9 @@
+@Sudo(zpUtils::GLOBAL_OWNER)
+macroscript getRoomData (string room) {
+	
+	var {result: data } = sudo zpUtils::GLOBAL_OWNER datastorage.get({
+		'table': 'rooms',
+		'key': room
+	});
+	
+} return { data }

@@ -1,0 +1,165 @@
+
+:host .area-main
+{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../assets/bckg.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(0,0,0,0.8);
+    color: white;
+}
+
+:host section
+{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.2);
+    text-align: left;
+}
+
+@keyframes leave {
+    from {bottom: -100px; left: 0px; opacity: 1; transform: rotateZ(-30deg);}
+    to {bottom: 1500px; left: 700px; opacity: 0.8; transform: rotateZ(-10deg);}
+}
+
+@keyframes enter {
+    from {right: 0px; top: -100px; opacity: 1;}
+    to {right: 0px; top: 2000px; opacity: 0.8;}
+}
+
+:host .rocket-enter
+{
+    position: absolute;
+    opacity: 0;
+    font-size: 500%;
+    animation-name: enter;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-delay: 1s;
+    color: #669999;
+    z-index: 20;
+    transform: rotateZ(135deg) scale(1.5);
+}
+
+
+
+:host .rocket-leave
+{
+    position: absolute;
+    opacity: 0;
+    font-size: 500%;
+    animation-name: leave;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-delay: 4s;
+    color: #669999;
+}
+
+
+:host .fa-fire
+{
+	transform: rotateZ(-137deg);
+	position: relative;
+	left: -70px;
+	bottom: -10px;
+	font-size: 50%;
+}
+
+:host .login-form
+{
+    position: absolute;
+    right:0px;
+    top: 0px;
+    height: 100%;
+    width: 600px;
+    z-index: 10;
+    color: black;
+    margin: auto;
+    background-color: white;
+    text-align: center;
+    padding: 50px;
+    box-shadow: 0px 0px 200px 1px lightgray inset;
+    overflow-y: scroll;
+}
+
+
+:host .login-form h1 {
+	font-family: 'Source Sans Pro', sans-serif;
+	color: gray;
+    font-size: 400%;
+    margin: 0px;
+    padding: 50px;
+}
+
+:host .login-form .btn
+{
+    margin-bottom: 30px;
+	margin-right: 0px;
+	margin-top: 0px;
+	font-size: 150%;
+    font-family: 'Rubik', sans-serif;
+}
+
+:host .login-form--input label
+{
+    display: block;
+    text-align: left;
+    padding: 30px 0px 10px 40px;
+    font-family: 'Rubik', sans-serif;
+    color: gray;
+}
+
+:host .login-form--input input:focus
+{
+    border-bottom-color: gray;
+}
+
+:host .login-form--input input
+{
+    background-color: transparent;
+    border: none;
+    border-bottom: solid lightgray 2px;
+    font-size: 120%;
+    padding: 10px;
+    font-family: 'Rubik', sans-serif;
+    letter-spacing: 0px;
+    color: #3E3F3A;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+:host .login-form--register
+{
+    display: inline-block;
+    font-size: 80%;
+    color: black;
+    padding: 20px;
+}
+
+:host .login-form--register a
+{
+    color: #28AAE3;
+    text-decoration: underline;
+}
+
+:host .login-form--register a:hover
+{
+    cursor: pointer;
+    text-decoration: none;
+}
+
+:host .login-form--error
+{
+    padding: 10px;
+    color: #D9534F;
+    font-size: 110%;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 400;
+}

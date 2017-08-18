@@ -1,0 +1,69 @@
+/** 
+	Creation of the room with custom parameters if provided,
+	schedule questions, closing of the room and auto-destruction
+*/
+macroscript createCustomRoom(
+	string name = "Unknown",
+	string password = "",
+	number delay = ROOM_CLOSE_DELAY,
+	boolean chronomode = false,
+	@NotNull string seed
+) {
+	
+	var id = str:rnd36(6);
+	
+	var passwordHasBeenGiven = (password != "");
+	
+	var {result: {instances: instances}} = call getSeed({id: seed});
+	var instancesNb = coll:size(instances);
+	
+	// 1°) Creating the room
+	
+	var {result: {group: room}} = sudo zpUtils::GLOBAL_OWNER call zpGroupRecipe::createGroup({
+		name: name,
+		id: id,
+		metadata: {
+			creator: __userKey,
+			openDelay: delay*1000,
+			open: true,
+			needPassword: passwordHasBeenGiven,
+			password: password, // Feature : hash the password if needed
+			chronoMode: chronomode,
+			seed: seed,
+			createdAt: time:now(),
+			progressMaxQ: instancesNb,
+			progressCurrentQ: 0
+		},
+		members: []
+	}) hardFail;
+	
+	// 2°) Scheduling room closure (including initialization of storage)
+	
+	sudo zpUtils::GLOBAL_OWNER scheduler.setTimeout({
+		"parameter" : {
+			"name": "closeRoom",
+			"parameters": {"id": room.id}
+		},
+		"deploymentId" : code,
+		"verb" : "call",
+		"delay" : delay
+	});
+	
+		
+	
+	// 3°) Scheduling questions sequence
+	
+	var delayOfQuestion = delay + 3;
+	
+	sudo zpUtils::GLOBAL_OWNER scheduler.setTimeout({
+			"parameter": {
+			"name": "sendQuestion",
+			"parameters": {"room": room.id, "remaining": (instancesNb - 1)}
+		},
+		"deploymentId": code,
+		"verb": "call",
+		"delay": delayOfQuestion
+	});	
+	
+
+} return { room } on channel __selfName

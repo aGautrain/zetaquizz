@@ -1,0 +1,22 @@
+/** allow all players of a room to answer */
+@Sudo(zpUtils::GLOBAL_OWNER)
+macroscript theyCanAnswer (string room) {
+	
+	// Getting the members	(login/userKey)
+	var {result: {group: {members: fullMembers }}} = sudo zpUtils::GLOBAL_OWNER call zpGroupRecipe::getGroup({id: room}) hardFail;
+	
+	// Selecting only the userKey part
+	var members = [];
+	for member in fullMembers {
+		members = list:add(members, member.userKey);
+	}
+	
+	for member in members {
+		call setCanAnswer({
+			room: room,
+			member: member,
+			state: 0
+		}) hardFail;
+	}
+	
+}

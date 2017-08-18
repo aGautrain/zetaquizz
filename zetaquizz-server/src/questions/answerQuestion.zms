@@ -1,0 +1,86 @@
+macroscript answerQuestion(string room, string givenAnswer) {
+
+	// 1°) checking if can answer
+	var {result: {canAnswer: canAnswer}} = call getCanAnswer({
+		room : room,
+		member : __userKey
+	}) hardFail;
+	
+	
+	if(canAnswer == 0){
+		
+		// 2°) compare answer given with answer expected
+		
+		var {result: {answer: goodAnswer}} = call getAnswerExpected({room: room}) hardFail;
+		
+		// 3°) obtaining current scores
+
+		var {result: {scores: scores} } = call getScores({room: room}) hardFail;
+		
+		var notif = {};
+		var answerState = 0;
+		
+		// 4°) modifying scores according to answer
+		if(givenAnswer == goodAnswer){
+			
+			var {result: {reward: reward} } = call answerReward({ room: room }) hardFail;
+			
+			scores[__userKey] += reward;
+			
+			notif = {
+				message: "Right ! +" + reward + " points !",
+				correct: true,
+				points: reward
+			};
+			
+			answerState = 2;
+			
+		} else {
+			
+			scores[__userKey] += ANSWERING_PENALTY;
+			
+			notif = {
+				message: "Wrong... " + ANSWERING_PENALTY + " points",
+				correct: false,
+				points: ANSWERING_PENALTY
+			};
+			
+			answerState = 1;
+			
+		}
+		
+		// 5°) setting the answer state and the new scores in database
+		
+		call setCanAnswer({room : room, member : __userKey, state : answerState}) hardFail;
+		
+		call setScore({room : room, member : __userKey, score : scores[__userKey]}) hardFail;
+		
+		// 6°) formatting scores to match interface on client
+		var prettyScores = [];
+		for score in scores {
+			prettyScores = list:add(prettyScores, {
+				userKey: score.key,
+				score: score.value
+			});
+		}
+
+		// 7°) sending informations to players
+		call sendScores({room: room, scores: prettyScores}) hardFail;
+		call notifyMember({room : room, member : __userKey, notif : notif}) hardFail;
+		
+	} else {
+		
+		// already answered (might be a cheat try)
+		call notifyMember({
+			room : room,
+			member : __userKey,
+			notif : {
+				type: "game",
+				content: {},
+				message: "Can't answer more than once per question."
+			}
+		}) hardFail;
+		
+	}
+	
+}

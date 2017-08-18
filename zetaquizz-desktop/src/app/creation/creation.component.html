@@ -1,0 +1,120 @@
+<div class="area-main">
+    <header>
+        <div class="header-bckg">
+            <h1 class="main-title">Creation</h1>
+            <h4>Let's create the quizz, following three easy steps</h4>
+            <a (click)="backLobby()" class="btn btn-info btn-disconnect">
+                BACK <i class="fa fa-home" aria-hidden="true"></i>
+            </a>
+        </div>
+    </header>
+    <section class="container">
+        <div class="creation-steps">
+            <ul>
+              <li [ngClass]="{'active': stepIsFirst()}">Type</li>
+              <li [ngClass]="{'active': stepIsSecond()}">Questions</li>
+              <li [ngClass]="{'active': stepIsThird()}">Settings</li>
+            </ul>
+        </div>
+
+        <article *ngIf="stepIsFirst()" class="step-type">
+            <h2>1°) Choosing quizz type</h2>
+            <div class="sub-title--diviser"></div>
+
+            <div (click)="selectCustomType()" [ngClass]="{'type': true, 'type--custom': true, 'type--selected': typeIsCustom()}" title="Chose custom">
+                <i class="icon fa fa-wrench" aria-hidden="true"></i>
+                <h3>Custom</h3>
+                <p>Write your own questions</p>
+            </div>
+
+            <div class="type type--random" title="Chose random">
+                <i class="icon fa fa-random" aria-hidden="true"></i>
+                <h3>Random</h3>
+                <p>Pick a bunch of random questions</p>
+            </div>
+
+            <div class="type type--music type--disabled" title="Coming soon !">
+                <i class="icon fa fa-clock-o" aria-hidden="true"></i>
+                <h3>Music</h3>
+                <p>Listen to famous music extracts from Deezer</p>
+            </div>
+
+            <a (click)="nextStep()" [ngClass]="{'btn': true, 'btn-info': true, 'btn-action': true, 'disabled': typeIsUnknown()}">
+                <i class="fa fa-caret-right" aria-hidden="true"></i> Next step
+            </a>
+
+        </article>
+
+        <article *ngIf="stepIsSecond()" class="step-type">
+            <h2>2°) Writing questions</h2>
+            <div class="sub-title--diviser"></div>
+
+            <questions-customizer class="row col-xs-6 col-xs-offset-3" #seed></questions-customizer>
+
+            <a (click)="nextStep()" [ngClass]="{'btn': true, 'btn-info': true, 'btn-action': true, 'disabled': seedIsUnknown()}">
+                <i class="fa fa-caret-right" aria-hidden="true"></i> Next step
+            </a>
+
+        </article>
+
+        <article *ngIf="stepIsThird()" class="step-type">
+            <h2>3°) Setting parameters</h2>
+            <div class="sub-title--diviser"></div>
+
+            <div class="row col-xs-6 col-xs-offset-3">
+                <form class="form-settings">
+                        <div class="form-group">
+                            <p>Name of the room</p>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-flag" aria-hidden="true"></i></span>
+                                <input [(ngModel)]="roomName" class="form-control" name="roomName" placeholder="Will appear in lobby" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <p>Password (room open if not specified)</p>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
+                                <input [(ngModel)]="roomPassword" class="form-control" name="roomPassword" placeholder="Prevents random people from entering" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <p>Time spent before launch</p>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-hourglass-half" aria-hidden="true"></i></span>
+                                <input [(ngModel)]="roomTime" class="form-control" name="roomTime" min="10" max="75" step="5" placeholder="Leave time for people to join room" type="number">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <p>Game mode</p>
+                            <div class="col-lg-12 text-left">
+                                <div class="radio">
+                                    <label>
+                                        <input [(ngModel)]="roomChronomode" name="roomChronomode" value="default" type="radio">
+                                        DEFAULT - Right answer + 5 points, wrong answers -1 point
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input [(ngModel)]="roomChronomode" name="roomChronomode" value="chronomode" type="radio">
+                                        CHRONOMODE - Earn points based on how fast you answer
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                </form>
+            </div>
+
+
+            <a (click)="create()" [ngClass]="{'btn': true, 'btn-info': true, 'btn-action': true, 'disabled': !formComplete()}">
+                <i class="fa fa-caret-right" aria-hidden="true"></i> Go !
+            </a>
+
+        </article>
+
+
+
+    </section>
+</div>

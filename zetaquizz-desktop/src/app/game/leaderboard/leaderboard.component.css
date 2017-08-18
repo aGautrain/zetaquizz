@@ -1,0 +1,12 @@
+/* LEADERBOARD */
+:host .leaderboard-players
+{
+    padding-left: 0px;
+}
+
+:host .leaderboard-players li
+{
+    display: inline-block;
+    padding: 10px;
+}
+/* END LEADERBOARD */

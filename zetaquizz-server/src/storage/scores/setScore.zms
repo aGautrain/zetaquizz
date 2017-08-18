@@ -1,0 +1,15 @@
+@Sudo(zpUtils::GLOBAL_OWNER)
+macroscript setScore(
+	/** Room id */ @NotNull string room,
+	/** Member key */ @NotNull string member,
+	/** New score value */ @NotNull number score
+) {
+	
+	sudo zpUtils::GLOBAL_OWNER datastorage.put({
+		table : 'rooms',
+		data : score,
+		key : room,
+		key2 : member,
+		column : 'scores'
+	});
+}

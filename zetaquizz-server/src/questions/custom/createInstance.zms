@@ -1,0 +1,22 @@
+macroscript createInstance(
+	@NotNull string question,
+	@NotNull array answers,
+	@NotNull string solution
+) {
+	
+	var id = str:rnd36(8);
+	
+	if(question != "question"){
+		es.index({
+			type : 'question',
+			id : id,
+			index : 'quizz',
+			data : {
+				question: question,
+				answers: answers,
+				solution: solution,
+				origine: "private" // private means it has been define by a user
+			}
+		});	
+	}
+} return { /** the id of the document */ id }

@@ -1,0 +1,40 @@
+<div class="area-main">
+    <header>
+        <div class="header-bckg">
+            <h1 class="main-title">LOBBY</h1>
+            <h4>From here you can join a quizz or access creation mode with the rocket button</h4>
+            <a (click)="hostRoom()" class="btn btn-info btn-action">
+                Create my own quizz <i class="fa fa-rocket" aria-hidden="true"></i>
+            </a>
+            <a (click)="quitApp()" class="btn btn-danger btn-disconnect">
+                <i class="fa fa-power-off" aria-hidden="true"></i>
+            </a>
+        </div>
+    </header>
+    <section class="container-fluid">
+        <div *ngIf="thereIsRoomAvailable(); else noRoomAvailable">
+            <h3 class="sub-title">You can join</h3>
+            <div class="sub-title--diviser"></div>
+
+            <article *ngFor="let room of getOpenRooms()" class="room-card room-card--open">
+                <app-room (click)="joinRoom(room)" [room]="room"></app-room>
+            </article>
+        </div>
+
+        <ng-template #noRoomAvailable>
+            <div>
+                <h1 class="main-message">No quizz available now</h1>
+            </div>
+        </ng-template>
+
+    </section>
+    <section class="container-fluid">
+        <h3 class="sub-title">Recently started</h3>
+        <div class="sub-title--diviser"></div>
+
+        <article *ngFor="let room of existingRooms | cantJoin:room" class="room-card room-card--closed">
+            <app-room [room]="room"></app-room>
+        </article>
+
+    </section>
+</div>

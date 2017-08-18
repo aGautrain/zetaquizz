@@ -1,0 +1,92 @@
+<!-- EDITING VIEW -->
+<article *ngIf="isEditingInstance" [@rightItem]="'in'"style="width: 100%;">
+
+    <div class="custom-question btn-group popup-close">
+        <a (click)="closeEditor()" class="btn btn-danger">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </a>
+    </div>
+
+    <form>
+        <legend>Question {{ instanceEdited + 1 }}</legend>
+
+        <div class="input-group">
+            <input [(ngModel)]="instanceTemporary['question']" type="text" name="question" class="form-control" placeholder="Question">
+        </div>
+
+        <p>Check the right answer</p>
+
+        <div *ngFor="let k of answersKeys()" class="input-group">
+            <span class="input-group-addon">
+                <input [(ngModel)]="instanceTemporary['solution']" type="radio" name="solution" [value]="k">
+            </span>
+            <input [(ngModel)]="instanceTemporary['answers'][k]" type="text"  [name]="getAnswerName(k)" class="form-control" [placeholder]="getAnswerName(k)">
+        </div>
+    </form>
+
+    <p *ngIf="!isValidInstance()">
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        You must fill at least the question and the answer checked as valid !
+    </p>
+
+    <div class="custom-question btn-group popup-validate">
+        <a (click)="validateEditor()" [ngClass]="{'btn':true, 'btn-primary':true,'disabled':!isValidInstance()}">
+            Validate
+        </a>
+    </div>
+
+</article>
+<!-- END EDITING VIEW -->
+
+<!-- RECAP VIEW -->
+<article *ngIf="!isEditingInstance" [@fading]="'in'" style="width: 100%;">
+
+
+
+    <p class="titles"><i class="fa fa-cog" aria-hidden="true"></i> Use the code below to play again</p>
+
+    <div class="form-group">
+        <div class="input-group">
+            <!--<span class="input-group-btn">
+              <button (click)="exportQuizz()" [ngClass]="{'btn': true, 'btn-primary': true, 'disabled': !isValidQuizz()}" type="button" title="Export your quizz and get a seed (must have a quizz above)"><i class="fa fa-cloud-upload" aria-hidden="true"></i></button>
+          </span>-->
+            <input [(ngModel)]="quizzSeed" name="quizzSeed" class="form-control seed-input" placeholder="No code" type="text">
+            <!--<span class="input-group-btn">
+              <button (click)="importQuizz()" [ngClass]="{'btn': true, 'btn-danger': true, 'disabled': !isValidSeed()}" type="button" title="Load quizz from existant seed (must give a seed)"><i class="fa fa-cloud-download" aria-hidden="true"></i></button>
+          </span>-->
+        </div>
+    </div>
+
+    <p>
+        Share that code to let other players starting a copy of your quizz !<br/>
+        If you have a code just type it here and then load the quizz.
+    </p>
+
+    <div class="separator"></div>
+
+    <p class="titles"><i class="fa fa-th-list" aria-hidden="true"></i> There is {{ instances.length }} question(s) yet</p>
+
+    <div *ngFor="let k of instancesKeys()" [@leftItem]="'in'">
+        <div class="custom-question btn-group">
+            <a class="btn btn-primary disabled">Question {{ k + 1 }}</a>
+            <a (click)="goToEditor(k)" class="btn btn-default"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+            <a (click)="deleteInstance(k)" class="btn btn-danger"><i class="fa fa-ban" aria-hidden="true"></i></a>
+        </div>
+    </div>
+
+    <div *ngIf="canImportQuizz()" class="custom-question btn-group btn-group--new-question">
+        <a (click)="importQuizz()" class="btn btn-warning">Import quizz</a>
+    </div>
+
+    <div class="custom-question btn-group btn-group--new-question">
+        <a (click)="goToEditor(instances.length)" class="btn btn-default">Add question</a>
+    </div>
+
+    <div *ngIf="canExportQuizz()" class="custom-question btn-group btn-group--new-question">
+        <a (click)="exportQuizz()" class="btn btn-success">Send quizz</a>
+    </div>
+
+
+
+</article>
+<!-- END RECAP VIEW -->

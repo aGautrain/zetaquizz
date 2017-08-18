@@ -1,0 +1,173 @@
+
+:host article
+{
+    padding-bottom: 150px;
+}
+
+:host .creation-steps ul
+{
+    padding: 30px 0px 30px 0px;
+}
+
+:host .creation-steps ul li
+{
+    display: inline-block;
+    padding: 15px 18px 15px 25px;
+    margin-right: 20px;
+    margin-left: 20px;
+    text-align: center;
+}
+
+:host .creation-steps ul li:not(:last-child)::after
+{
+    position: relative;
+    left: 40px;
+    content: '>';
+    font-weight: normal;
+    color: rgb(62, 63, 58);
+}
+
+:host .creation-steps ul li.active
+{
+    font-weight: bold;
+    background-color: rgb(62, 63, 58);
+    border-radius: 5px;
+    color: white;
+}
+
+
+
+:host .type {
+    position: relative;
+	display: inline-block;
+	padding: 50px 20px 50px 100px;
+	text-align: right;
+	background-color: lightgray;
+	max-width: 300px;
+	margin: 30px 30px 30px 30px;
+    font-size: 120%;
+    overflow: hidden;
+}
+
+:host .type h3 {
+    position: relative;
+    z-index: 1;
+    font-family: 'Rubik', sans-serif;
+}
+
+:host .type p {
+    position: relative;
+    z-index: 1;
+}
+
+:host .type:not(.type--disabled):hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+:host .type--custom {
+    background-color: #80CD3D;
+    color: white;
+}
+
+:host .type--random {
+    background-color: #F1452A;
+    color: white;
+}
+
+:host .type .icon {
+    position: absolute;
+    z-index: 0;
+    bottom: -50px;
+    left: -50px;
+    color: white;
+    font-size: 2000%;
+    opacity: 0.3;
+}
+
+:host .type--selected {
+    transform: scale(1.1) !important;
+}
+
+:host .type--disabled {
+    opacity: 0.5;
+}
+
+:host .type--disabled .icon {
+    color: gray;
+}
+
+:host .form-settings .form-group {
+    margin-bottom: 40px;
+}
+
+
+/*
+
+:host .input-group
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+:host .tabs
+{
+    padding-left: 0px;
+    margin-bottom: 0px;
+    width: 100%;
+}
+
+:host .tabs li
+{
+    display: inline-block;
+    color: lightgray;
+}
+
+
+
+:host .tabs--active
+{
+    background-color: #F8F5F0;
+}
+
+:host .tabs li a.btn
+{
+    color: gray;
+    font-size: 110%;
+    transition: 0.1s;
+}
+
+:host .tabs .tabs--active a.btn
+{
+    color: black;
+    font-size: 130%;
+}
+
+
+
+:host .input-quizz-type
+{
+    position: relative;
+    right: 30%;
+}
+
+
+:host .form-horizontal .control-label
+{
+    margin-bottom: 6px;
+}
+
+:host .container
+{
+    padding-bottom: 100px;
+}
+
+:host article
+{
+    position: relative;
+}
+
+:host .btn-group a.btn {
+    margin-left: 0px;
+    margin-right: 0px;
+}*/
